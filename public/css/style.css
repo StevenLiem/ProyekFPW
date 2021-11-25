@@ -1,0 +1,65 @@
+body{
+    color: white;
+}
+
+.nav-list a {
+    color: silver;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: fit-content;
+    height: 100%;
+    font-size: 14px;
+}
+
+.nav-list a:hover {
+    transition: 0.3s;
+    color: white;
+    text-decoration: none;
+}
+
+.form-group input {
+    width: 100%;
+}
+
+.form-group label {
+    width: 100%;
+    font-size: 16px;
+    padding-bottom: 6px;
+}
+
+.has-icon .form-control {
+    padding-left: 2.375rem;
+}
+
+.has-icon .form-control-feedback {
+    position: absolute;
+    z-index: 2;
+    display: block;
+    width: 2.375rem;
+    height: 2.375rem;
+    line-height: 2.375rem;
+    text-align: center;
+    pointer-events: none;
+    color: #026838;
+}
+
+.horLineGradient {
+    background: rgb(0,252,183);
+    background: radial-gradient(circle, rgba(0,252,183,1) 0%, rgba(2,104,56,1) 100%);
+    width: 100%;
+    height: 1px;
+}
+
+.btn-gradient-green {
+    color: white;
+    background: rgb(21,138,82);
+    background: radial-gradient(circle, rgba(21,138,82,1) 45%, rgba(16,115,88,1) 100%);
+}
+
+.btn-gradient-green:hover {
+    color: white;
+    background: rgb(21,138,82);
+    background: radial-gradient(circle, rgba(21,138,82,1) 88%, rgba(16,115,88,1) 100%);
+}
+
