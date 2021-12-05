@@ -63,3 +63,7 @@ body{
     background: radial-gradient(circle, rgba(21,138,82,1) 88%, rgba(16,115,88,1) 100%);
 }
 
+.nav-tabs .nav-link.active{
+    background-color: #026838;
+    color: white;
+}

@@ -28,6 +28,7 @@ class SiteController extends Controller
 
         if (Auth::attempt($credentials)){
             if (Auth::user()->status == "banned"){
+                Auth::logout();
                 return redirect('login')->with('error', 'your account is banned');
             }
 

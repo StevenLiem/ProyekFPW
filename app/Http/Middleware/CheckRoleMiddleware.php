@@ -21,12 +21,8 @@ class CheckRoleMiddleware
             if (Auth::user()->role == $paramRole){
                 return $next($request);
             }
-            else{
-                return back();
-            }
         }
-        else{
-            return back();
-        }
+
+        abort(403);
     }
 }

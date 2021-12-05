@@ -30,4 +30,17 @@ Route::post('doRegister', [SiteController::class, 'doRegister'])->name('doRegist
 
 Route::prefix('admin')->middleware(['CheckRole:admin'])->group(function () {
     Route::get('/', [AdminController::class, 'gotoAdmin'])->name('master');
+    Route::get('/masterManga', [AdminController::class, 'gotoMasterManga'])->name('masterManga');
+    Route::get('/addManga', [AdminController::class, 'gotoAddManga'])->name('addManga');
+    Route::get('/banUser/{id}', [AdminController::class, 'banUser']);
+
+    Route::post('/addNewManga', [AdminController::class, 'addNewManga']);
+    Route::get('/deleteManga/{id}', [AdminController::class, 'deleteManga']);
+
+    Route::post('/addAuthor', [AdminController::class, 'addAuthor']);
+    Route::post('/addArtist', [AdminController::class, 'addArtist']);
+    Route::post('/addGenre', [AdminController::class, 'addGenre']);
+    Route::post('/updateAuthor/{id}', [AdminController::class, 'updateAuthor']);
+    Route::post('/updateArtist/{id}', [AdminController::class, 'updateArtist']);
+    Route::post('/updateGenre/{id}', [AdminController::class, 'updateGenre']);
 });
