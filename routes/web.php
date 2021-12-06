@@ -28,6 +28,8 @@ Route::get('logout', [SiteController::class, 'logout'])->name('logout');
 Route::post('doLogin', [SiteController::class, 'doLogin'])->name('doLogin');
 Route::post('doRegister', [SiteController::class, 'doRegister'])->name('doRegister');
 
+Route::get('show/{id}', [SiteController::class, 'gotoDetail'])->name('detail');
+
 Route::prefix('admin')->middleware(['CheckRole:admin'])->group(function () {
     Route::get('/', [AdminController::class, 'gotoAdmin'])->name('master');
     Route::get('/masterManga', [AdminController::class, 'gotoMasterManga'])->name('masterManga');

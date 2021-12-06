@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Manga;
 use App\Models\Users;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -12,6 +13,11 @@ use Illuminate\Support\Facades\Session;
 class SiteController extends Controller
 {
     //
+    public function gotoDetail(Request $request)
+    {
+        $manga = Manga::find($request->id);
+        return view('detail', ['manga'=>$manga]);
+    }
     public function gotoHome(Request $request){
         return view('home');
     }

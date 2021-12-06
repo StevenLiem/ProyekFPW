@@ -6,10 +6,10 @@
 
 @section("mainContent")
 
-    <div class="container-fluid">
+    {{-- <div class="container-fluid"> --}}
 
         {{-- Contoh ambil gambar dari storage --}}
-        @php
+        {{-- @php
             $manga_list = DB::table('manga')->get();
         @endphp
         @foreach ($manga_list as $manga)
@@ -31,9 +31,30 @@
                     </div>
                 </div>
             </div>
-        @endforeach
+        @endforeach --}}
 
-    </div>
+    {{-- </div> --}}
+    <div class="container-fluid row row-cols-1 row-cols-md-5 g-4 mt-3">
+        @php
+            $manga_list = DB::table('manga')->get();
+        @endphp
+        @foreach ($manga_list as $manga)
+            @php
+                $images = Storage::disk('public')->files("manga/$manga->id"); // ambil semua gambar
+                $cover = $images[0]; // ambil gambar pertama sebagai cover
+            @endphp
+            <div class="col">
+                <div class="card h-100" style="background-color: #191a1c">
+                    <a class="text-decoration-none text-light" href="{{ url("show/$manga->id") }}">
+                        <img draggable="false" class="img-fluid" style="max-height: 300px" src="{{ asset("storage/$cover") }}" alt="">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ $manga->title }}</h5>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        @endforeach
+      </div>
 
     <script>
 
