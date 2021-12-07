@@ -34,7 +34,7 @@
         @endforeach --}}
 
     {{-- </div> --}}
-    <div class="container-fluid row row-cols-1 row-cols-md-5 g-4 mt-3">
+    <div class="container-fluid row row-cols-1 row-cols-md-5 g-4 mt-3 mb-5" style="margin:auto;">
         @php
             $manga_list = DB::table('manga')->get();
         @endphp

@@ -33,7 +33,7 @@
                 $cover = $images[$i];
             @endphp
             <div class="col">
-                <div class="card h-100" style="background-color: #191a1c">
+                <div class="card h-100 mt-2 mb-2" style="background-color: #191a1c">
                     <img draggable="false" class="img-fluid" style="max-height: 300px" src="{{ asset("storage/$cover") }}" alt="">
                 </div>
             </div>
