@@ -27,14 +27,17 @@
         </div>
     </div>
     <div class="container mb-5 p-3 rounded-3 row row-cols-1 row-cols-md-5" style="background-color: #191a1c; margin:auto; width:90%;">
+        @php
+            natsort($images);
+            $images = array_values($images);
+        @endphp
         @for ($i = 1; $i < sizeof($images); $i++)
             @php
-                $images = Storage::disk('public')->files("manga/$manga->id");
                 $cover = $images[$i];
             @endphp
             <div class="col">
                 <div class="card h-100 mt-2 mb-2" style="background-color: #191a1c">
-                    <img draggable="false" class="img-fluid" style="max-height: 300px" src="{{ asset("storage/$cover") }}" alt="">
+                    <img draggable="false" class="img-fluid" style="max-height: 300px" src="{{ asset("storage/$cover") }}" alt="{{ $cover }}">
                 </div>
             </div>
         @endfor

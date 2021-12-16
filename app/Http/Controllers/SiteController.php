@@ -13,13 +13,23 @@ use Illuminate\Support\Facades\Session;
 class SiteController extends Controller
 {
     //
+    public function search(Request $request)
+    {
+        Session::forget('search');
+        $manga_list = Manga::where('title', 'LIKE', "%$request->title%")->get();
+        Session::put('search', $request->title);
+        return view('home', ['manga_list'=>$manga_list]);
+    }
     public function gotoDetail(Request $request)
     {
+        Session::forget('search');
         $manga = Manga::find($request->id);
         return view('detail', ['manga'=>$manga]);
     }
     public function gotoHome(Request $request){
-        return view('home');
+        Session::forget('search');
+        $manga_list = Manga::all();
+        return view('home',['manga_list'=>$manga_list]);
     }
 
     public function gotoLogin(){

@@ -30,6 +30,8 @@ Route::post('doRegister', [SiteController::class, 'doRegister'])->name('doRegist
 
 Route::get('show/{id}', [SiteController::class, 'gotoDetail'])->name('detail');
 
+Route::get('search', [SiteController::class, 'search'])->name('search');
+
 Route::prefix('admin')->middleware(['CheckRole:admin'])->group(function () {
     Route::get('/', [AdminController::class, 'gotoAdmin'])->name('master');
     Route::get('/masterManga', [AdminController::class, 'gotoMasterManga'])->name('masterManga');
