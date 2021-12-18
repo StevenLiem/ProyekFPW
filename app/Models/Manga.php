@@ -36,4 +36,9 @@ class Manga extends Model
     public function genres(){
         return $this->belongsToMany(Genre::class, 'manga_genre', 'id_manga', 'id_genre');
     }
+
+    public function comments(){
+        return $this->hasMany(Comment::class, 'id_manga')
+                    ->orderBy('created_at', 'desc');
+    }
 }

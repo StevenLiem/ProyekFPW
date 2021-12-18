@@ -5,22 +5,23 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Author extends Model
+class Comment extends Model
 {
     use HasFactory;
 
     protected $connection = "conn_proyek";
-    protected $table = "author";
+    protected $table = "comment";
     protected $primaryKey = "id";
     public $incrementing = true;
-    public $timestamps = false;
+    public $timestamps = true;
 
     protected $fillable = [
-        'name'
+        'id_user',
+        'id_manga',
+        'content'
     ];
 
-    public function mangas()
-    {
-        return $this->hasMany(Manga::class, 'id_author');
+    public function owner(){
+        return $this->belongsTo(Users::class, 'id_user');
     }
 }

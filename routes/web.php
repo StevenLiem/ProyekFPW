@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\SiteController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -31,6 +32,10 @@ Route::post('doRegister', [SiteController::class, 'doRegister'])->name('doRegist
 Route::get('show/{id}', [SiteController::class, 'gotoDetail'])->name('detail');
 
 Route::get('search', [SiteController::class, 'search'])->name('search');
+
+Route::middleware(['CheckRole:user'])->group(function () {
+    Route::post('show/{id}/addComment', [UserController::class, 'addComment']);
+});
 
 Route::prefix('admin')->middleware(['CheckRole:admin'])->group(function () {
     Route::get('/', [AdminController::class, 'gotoAdmin'])->name('master');
