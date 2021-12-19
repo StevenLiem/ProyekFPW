@@ -54,3 +54,8 @@ Route::prefix('admin')->middleware(['CheckRole:admin'])->group(function () {
     Route::post('/updateArtist/{id}', [AdminController::class, 'updateArtist']);
     Route::post('/updateGenre/{id}', [AdminController::class, 'updateGenre']);
 });
+
+Route::prefix('user')->middleware(['CheckRole:user'])->group(function () {
+    Route::get('/profile', [UserController::class, 'gotoProfile']);
+    Route::post('/update', [UserController::class, 'updateProfile']);
+});
