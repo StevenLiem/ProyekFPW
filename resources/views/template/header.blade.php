@@ -21,7 +21,7 @@
                             <input type="text" class="form-control shadow-none" placeholder="Search Here" name="title" value="{{ Session::get('search') }}" required>
                             <button class="btn btn-success rounded shadow-none" type="submit"><i class="fa fa-search"></i></button>
                             @if (loggedIn())
-                                <a class="btn btn-outline-success mx-2 rounded shadow-none" href="" >
+                                <a class="btn btn-outline-success mx-2 rounded shadow-none" href="{{ url('user/profile') }}" >
                                     <i class="fas fa-user-circle"></i> {{Auth::user()->username}}
                                 </a>
                                 <a class="btn btn-outline-danger rounded shadow-none" href="{{ url('logout') }}" >Logout</a>
