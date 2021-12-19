@@ -26,6 +26,13 @@ class SiteController extends Controller
         $manga = Manga::find($request->id);
         return view('detail', ['manga'=>$manga]);
     }
+    public function read(Request $request)
+    {
+        Session::forget('search');
+        $manga = Manga::find($request->id);
+        $page = $request->page;
+        return view('read', ['manga'=>$manga, 'page'=>$page]);
+    }
     public function gotoHome(Request $request){
         Session::forget('search');
         $manga_list = Manga::all();

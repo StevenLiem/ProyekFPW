@@ -12,9 +12,9 @@
                 $cover = $images[0]; // ambil gambar pertama sebagai cover
             @endphp
             <div class="col">
-                <div class="card h-100" style="background-color: #191a1c">
+                <div class="card h-100 border-0" style="background-color: #191a1c">
                     <a class="text-decoration-none text-light" href="{{ url("show/$manga->id") }}">
-                        <img draggable="false" class="img-fluid" style="max-height: 300px" src="{{ asset("storage/$cover") }}" alt="">
+                        <img draggable="false" class="img-fluid rounded-top" style="max-height: 300px; width:fit-content;" src="{{ asset("storage/$cover") }}" alt="">
                         <div class="card-body">
                             <h5 class="card-title">{{ $manga->title }}</h5>
                         </div>
@@ -22,10 +22,5 @@
                 </div>
             </div>
         @endforeach
-      </div>
-
-    <script>
-
-    </script>
-
+    </div>
 @endsection

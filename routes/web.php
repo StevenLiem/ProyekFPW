@@ -30,6 +30,7 @@ Route::post('doLogin', [SiteController::class, 'doLogin'])->name('doLogin');
 Route::post('doRegister', [SiteController::class, 'doRegister'])->name('doRegister');
 
 Route::get('show/{id}', [SiteController::class, 'gotoDetail'])->name('detail');
+Route::get('show/{id}/{page}', [SiteController::class, 'read'])->name('read');
 
 Route::get('search', [SiteController::class, 'search'])->name('search');
 

@@ -18,12 +18,7 @@
                 <div class="navbar-nav ms-auto">
                     <form class="form-inline my-2 my-lg-0" action="/search" method="GET">
                         <div class="input-group">
-                            @if (Session::has('search'))
-                                @php $search = Session::get('search') @endphp
-                            @else
-                                @php $search = null @endphp
-                            @endif
-                            <input type="text" class="form-control shadow-none" placeholder="Search Here" name="title" value="{{ $search }}" required>
+                            <input type="text" class="form-control shadow-none" placeholder="Search Here" name="title" value="{{ Session::get('search') }}" required>
                             <button class="btn btn-success rounded shadow-none" type="submit"><i class="fa fa-search"></i></button>
                             @if (loggedIn())
                                 <a class="btn btn-outline-success mx-2 rounded shadow-none" href="" >
