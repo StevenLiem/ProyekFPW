@@ -1,7 +1,7 @@
 @extends('template.body')
 
 @section('title')
-    <title> Read </title>
+    <title> {{$manga->title}} </title>
 @endsection
 
 @section("mainContent")
@@ -56,11 +56,11 @@
             @if($i == $page-1)
                 @if($i == sizeof($images)-1)
                     <a class="text-decoration-none text-light" href="{{ url("show/$manga->id") }}">
-                        <img draggable="false" class="img-fluid rounded-3 d-block ms-auto me-auto" src="{{ asset("storage/$cover") }}" alt="{{ $cover }}" style="width:1500px">
+                        <img draggable="false" class="img-fluid rounded-3 d-block mx-auto w-100" src="{{ asset("storage/$cover") }}" alt="{{ $cover }}" style="max-width:800px">
                     </a>
                 @else
                     <a class="text-decoration-none text-light" href="{{ url("show/$manga->id/$next") }}">
-                        <img draggable="false" class="img-fluid rounded-3 d-block ms-auto me-auto" src="{{ asset("storage/$cover") }}" alt="{{ $cover }}" style="width:1500px">
+                        <img draggable="false" class="img-fluid rounded-3 d-block mx-auto w-100" src="{{ asset("storage/$cover") }}" alt="{{ $cover }}" style="max-width:800px">
                     </a>
                 @endif
             @endif

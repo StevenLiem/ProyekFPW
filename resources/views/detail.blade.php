@@ -5,35 +5,54 @@
 @endsection
 
 @section("mainContent")
-    <div class="container mt-5 mb-3 p-3 rounded-3" style="background-color: #191a1c; margin:auto; width:90%;">
-        @php
-            $images = Storage::disk('public')->files("manga/$manga->id");
-            $cover = $images[0];
-            $genreString = "";
-            $ctr = 1;
-        @endphp
-        @foreach ($manga->genres as $genre)
-            @if($ctr == $manga->genres->count())
-                @php $genreString .= $genre->name; @endphp
-            @else
-                @php $genreString .= $genre->name . ", "; $ctr += 1; @endphp
-            @endif
-        @endforeach
-        <div class="card" style="background-color: #191a1c;">
-            <div class="row g-0">
-                <div class="col-md-4">
-                    <a class="text-decoration-none text-light" href="{{ url("show/$manga->id/1") }}">
-                        <img draggable="false" class="img-fluid rounded-3" style="margin-left:100px; max-height: 500px;" src="{{ asset("storage/$cover") }}" alt="{{ $cover }}">
-                    </a>
+    @php
+        $images = Storage::disk('public')->files("manga/$manga->id");
+        $cover = $images[0];
+    @endphp
+    <div class="container p-3 my-3 rounded" style="background-color: #191a1c">
+        <div class="d-flex flex-row flex-wrap">
+            <div class="d-flex flex-column m-3">
+                <img draggable="false" class="img-fluid rounded" style="width: 24rem; max-width: 100%; height: auto;" src="{{ asset("storage/$cover") }}" alt="{{ asset("storage/$cover") }}">
+                @if (loggedIn())
+                    @php
+                        $result = DB::connection("conn_proyek")->table('user_favorite')
+                                    ->where('id_user','=',Auth::user()->id)
+                                    ->where('id_manga','=',$manga->id)->first();
+                    @endphp
+                    @if ($result != null)
+                        <a href=""><button class="btn btn-danger w-100">
+                            <span class="far fa-heart"></span>
+                            Unfavorite
+                        </button></a>
+                    @else
+                        <a href=""><button class="btn btn-primary w-100">
+                            <span class="fas fa-heart"></span>
+                            Favorite
+                        </button></a>
+                    @endif
+                @endif
+            </div>
+            <div class="d-flex flex-column m-3 overflow-auto">
+                <div class="mb-1" id="title" style="font-size: 28px; font-weight: bold">
+                    {{ $manga->title }}
                 </div>
-                <div class="col-md-8">
-                    <div class="card-body" style="margin-left:200px">
-                        <h5 class="card-title mb-5">{{ $manga->title }}</h5>
-                        <p class="card-text">Author : {{ $manga->author->name }}</p>
-                        <p class="card-text">Artist : {{ $manga->artist->name }}</p>
-                        <p class="card-text">Genre : {{ $genreString }}</p>
-                        <p class="card-text">Synopsis : {{ $manga->synopsis }}</p>
-                    </div>
+                <hr style="margin: 5px 0px">
+                <div class="my-1">
+                    Author : <a href=""><span class="badge bg-secondary">{{ $manga->author->name }}</span></a>
+                </div>
+                <div class="my-1">
+                    Artist : <a href=""><span class="badge bg-secondary">{{ $manga->artist->name }}</span></a>
+                </div>
+                <div class="my-1">
+                    Genre :
+                    @foreach ($manga->genres as $genre)
+                        <a href=""><span class="badge bg-secondary">{{ $genre->name }}</span></a>
+                    @endforeach
+                </div>
+                <hr style="margin: 5px 0px">
+                <div class="mt-2" id="synopsis" style="font-size: 12px">
+                    <span class="mb-2" style="font-size: 14px; font-weight: bold">Synopsis</span><br>
+                    {{ $manga->synopsis }}
                 </div>
             </div>
         </div>

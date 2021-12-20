@@ -15,6 +15,8 @@
         <link rel="stylesheet" href="{{ asset('css/style.css') }}">
         {{-- <title>Document</title> --}}
         @yield('title')
+        {{-- logo --}}
+        <link rel="shortcut icon" href="{{ asset('peeporeadmanga.png') }}" type="image/x-icon">
     </head>
     <body class="bg-dark">
 

@@ -1,7 +1,7 @@
 @extends('template.body')
 
 @section('title')
-    <title> Home </title>
+    <title> PepeManga </title>
 @endsection
 
 @section("mainContent")
