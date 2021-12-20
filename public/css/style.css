@@ -63,6 +63,18 @@ body{
     background: radial-gradient(circle, rgba(21,138,82,1) 88%, rgba(16,115,88,1) 100%);
 }
 
+.btn-gradient-gold {
+    color: white;
+    background: rgb(218,165,32);
+    background: radial-gradient(circle, rgba(218,165,32,1) 45%, rgba(255,215,0,1) 100%);
+}
+
+.btn-gradient-gold:hover {
+    color: white;
+    background: rgb(218,165,32);
+    background: radial-gradient(circle, rgba(218,165,32,1) 88%, rgba(255,215,0,1) 100%);
+}
+
 .nav-tabs .nav-link.active{
     background-color: #026838;
     color: white;

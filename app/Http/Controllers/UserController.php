@@ -73,4 +73,15 @@ class UserController extends Controller
     public function gotoFavorite(){
         return view('favorite');
     }
+
+    public function becomePremium(Request $request){
+        $user = Users::find($request->id);
+        $result = $user->update([
+            "privilege" => "premium"
+        ]);
+
+        if ($result){
+            return back()->with('msg', 'Your account is premium now!');
+        }
+    }
 }

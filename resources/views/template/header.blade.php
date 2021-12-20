@@ -36,6 +36,9 @@
                             @if (loggedIn())
                                 <a class="btn btn-outline-success mx-2 rounded shadow-none" href="{{ url('user/profile') }}" >
                                     <i class="fas fa-user-circle"></i> {{Auth::user()->username}}
+                                    @if(Auth::user()->privilege == "premium")
+                                        <i class="fas fa-crown"></i>
+                                    @endif
                                 </a>
                                 <a class="btn btn-outline-danger rounded shadow-none" href="{{ url('logout') }}" >Logout</a>
                             @else

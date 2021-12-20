@@ -68,4 +68,5 @@ Route::prefix('admin')->middleware(['CheckRole:admin'])->group(function () {
 Route::prefix('user')->middleware(['CheckRole:user'])->group(function () {
     Route::get('/profile', [UserController::class, 'gotoProfile']);
     Route::post('/update', [UserController::class, 'updateProfile']);
+    Route::post('/toPremium', [UserController::class, 'becomePremium']);
 });

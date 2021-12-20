@@ -38,10 +38,18 @@
                 <small class="text-danger">{{ $message }}</small>
             @enderror <br><br>
             <button type="submit" class="btn btn-gradient-green text-white w-100 mb-5" style="border: 0" name="sub">
-                {{-- <span class="fa fa-update-alt form-control-feedback mr-2"></span> Update --}}
-                Update
+                <span class="fa fa-upload form-control-feedback mr-2"></span> Update
             </button>
         </form>
+        @if(Auth::user()->privilege == "regular")
+            <form method="post" action="{{ url('user/toPremium')}}">
+                @csrf
+                <input type="hidden" name="id" value="{{Auth::user()->id}}">
+                <button type="submit" class="btn btn-gradient-gold text-white w-100 mb-5" style="border: 0" name="prem">
+                    <span class="fa fa-crown form-control-feedback mr-2"></span> Become Premium
+                </button>
+            </form>
+        @endif
     </div>
 
     <script>

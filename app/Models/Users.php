@@ -21,7 +21,8 @@ class Users extends Authenticatable
         'password',
         'email',
         'status',
-        'role'
+        'role',
+        'privilege'
     ];
 
     public function favorites(){
