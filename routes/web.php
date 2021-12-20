@@ -32,10 +32,20 @@ Route::post('doRegister', [SiteController::class, 'doRegister'])->name('doRegist
 Route::get('show/{id}', [SiteController::class, 'gotoDetail'])->name('detail');
 Route::get('show/{id}/{page}', [SiteController::class, 'read'])->name('read');
 
+Route::get('artist', [SiteController::class, 'gotoArtist'])->name('artist');
+Route::get('artist/{name}', [SiteController::class, 'searchArtist']);
+Route::get('author', [SiteController::class, 'gotoAuthor'])->name('author');
+Route::get('author/{name}', [SiteController::class, 'searchAuthor']);
+Route::get('genre', [SiteController::class, 'gotoGenre'])->name('genre');
+Route::get('genre/{name}', [SiteController::class, 'searchGenre']);
+Route::get('random', [SiteController::class, 'randomManga'])->name('random');
+
 Route::get('search', [SiteController::class, 'search'])->name('search');
 
 Route::middleware(['CheckRole:user'])->group(function () {
     Route::post('show/{id}/addComment', [UserController::class, 'addComment']);
+    Route::post('show/{id}/addFavorite', [UserController::class, 'addFavorite']);
+    Route::get('favorite', [UserController::class, 'gotoFavorite'])->name('favorite');
 });
 
 Route::prefix('admin')->middleware(['CheckRole:admin'])->group(function () {

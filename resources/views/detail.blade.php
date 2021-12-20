@@ -1,7 +1,7 @@
 @extends('template.body')
 
 @section('title')
-    <title> Detail </title>
+    <title> {{$manga->title}} </title>
 @endsection
 
 @section("mainContent")
@@ -12,24 +12,26 @@
     <div class="container p-3 my-3 rounded" style="background-color: #191a1c">
         <div class="d-flex flex-row flex-wrap">
             <div class="d-flex flex-column m-3">
-                <img draggable="false" class="img-fluid rounded" style="width: 24rem; max-width: 100%; height: auto;" src="{{ asset("storage/$cover") }}" alt="{{ asset("storage/$cover") }}">
+                <img draggable="false" class="img-fluid rounded" style="width: 24rem; max-width: 100%; height: auto; max-height: 400px" src="{{ asset("storage/$cover") }}" alt="{{ asset("storage/$cover") }}">
                 @if (loggedIn())
-                    @php
-                        $result = DB::connection("conn_proyek")->table('user_favorite')
-                                    ->where('id_user','=',Auth::user()->id)
-                                    ->where('id_manga','=',$manga->id)->first();
-                    @endphp
-                    @if ($result != null)
-                        <a href=""><button class="btn btn-danger w-100">
-                            <span class="far fa-heart"></span>
-                            Unfavorite
-                        </button></a>
-                    @else
-                        <a href=""><button class="btn btn-primary w-100">
-                            <span class="fas fa-heart"></span>
-                            Favorite
-                        </button></a>
-                    @endif
+                    <div id="btnFav">
+                        @php
+                            $result = DB::connection("conn_proyek")->table('user_favorite')
+                                        ->where('id_user','=',Auth::user()->id)
+                                        ->where('id_manga','=',$manga->id)->first();
+                        @endphp
+                        @if ($result != null)
+                            <button class="btn btn-danger w-100" id="favButton">
+                                <span class="far fa-heart"></span>
+                                Unfavorite
+                            </button>
+                        @else
+                            <button class="btn btn-success w-100" id="favButton">
+                                <span class="fas fa-heart"></span>
+                                Favorite
+                            </button>
+                        @endif
+                    </div>
                 @endif
             </div>
             <div class="d-flex flex-column m-3 overflow-auto">
@@ -37,16 +39,20 @@
                     {{ $manga->title }}
                 </div>
                 <hr style="margin: 5px 0px">
+                @php
+                    $authorName = $manga->author->name;
+                    $artistName = $manga->artist->name;
+                @endphp
                 <div class="my-1">
-                    Author : <a href=""><span class="badge bg-secondary">{{ $manga->author->name }}</span></a>
+                    Author : <a href="{{ url("/author/$authorName") }}"><span class="badge bg-secondary">{{ $authorName }}</span></a>
                 </div>
                 <div class="my-1">
-                    Artist : <a href=""><span class="badge bg-secondary">{{ $manga->artist->name }}</span></a>
+                    Artist : <a href="{{ url("/artist/$artistName") }}"><span class="badge bg-secondary">{{ $artistName }}</span></a>
                 </div>
                 <div class="my-1">
                     Genre :
                     @foreach ($manga->genres as $genre)
-                        <a href=""><span class="badge bg-secondary">{{ $genre->name }}</span></a>
+                        <a href="{{ url("/genre/$genre->name") }}"><span class="badge bg-secondary">{{ $genre->name }}</span></a>
                     @endforeach
                 </div>
                 <hr style="margin: 5px 0px">
@@ -68,7 +74,7 @@
                 $cover = $images[$i];
                 $j+=1;
             @endphp
-            <div class="col">
+            <div class="d-flex flex-wrap justify-content-center">
                 <div class="card h-100 mt-2 mb-2" style="background-color: #191a1c">
                     <a class="text-decoration-none text-light" href="{{ url("show/$manga->id/$j") }}">
                         <img draggable="false" class="img-fluid rounded-3" style="max-height: 300px" src="{{ asset("storage/$cover") }}" alt="{{ $cover }}">
@@ -125,6 +131,23 @@
                     }
                 })
             }
+        });
+
+        $('#btnFav').on('click', function(){
+            $.ajax({
+                url: window.location.pathname+'/addFavorite',
+                method: 'POST',
+                data: {
+                    _token: '<?php echo csrf_token() ?>'
+                },
+                success: function(data){
+                    console.log(data);
+                    $("#btnFav").load(window.location.href + " #btnFav");
+                },
+                error: function(data){
+                    console.log(data);
+                }
+            })
         });
     </script>
 @endsection

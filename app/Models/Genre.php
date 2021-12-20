@@ -18,4 +18,8 @@ class Genre extends Model
     protected $fillable = [
         'name'
     ];
+
+    public function mangas(){
+        return $this->belongsToMany(Manga::class, 'manga_genre', 'id_manga', 'id_genre');
+    }
 }

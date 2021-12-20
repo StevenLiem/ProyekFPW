@@ -23,4 +23,8 @@ class Users extends Authenticatable
         'status',
         'role'
     ];
+
+    public function favorites(){
+        return $this->belongsToMany(Manga::class, 'user_favorite', 'id_user', 'id_manga');
+    }
 }

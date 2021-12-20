@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Artist;
+use App\Models\Author;
+use App\Models\Genre;
 use App\Models\Manga;
 use App\Models\Users;
 use Illuminate\Http\Request;
@@ -97,5 +100,47 @@ class SiteController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
         return redirect('/');
+    }
+
+    public function gotoArtist(){
+        $artists = Artist::all();
+
+        return view('search.artist', ["artists"=>$artists]);
+    }
+
+    public function gotoAuthor(){
+        $authors = Author::all();
+
+        return view('search.author', ["authors"=>$authors]);
+    }
+
+    public function gotoGenre(){
+        $genres = Genre::all();
+
+        return view('search.genre', ["genres"=>$genres]);
+    }
+
+    public function searchArtist(Request $request){
+        $artist = Artist::where('name', $request->name)->first();
+
+        return view('search.artistResult', ["artist"=>$artist]);
+    }
+
+    public function searchAuthor(Request $request){
+        $author = Author::where('name', $request->name)->first();
+
+        return view('search.authorResult', ["author"=>$author]);
+    }
+
+    public function searchGenre(Request $request){
+        $genre = Genre::where('name', $request->name)->first();
+
+        return view('search.genreResult', ["genre"=>$genre]);
+    }
+
+    public function randomManga(Request $request){
+        $manga = Manga::all()->random(1)->first();
+
+        return redirect()->route('detail', [$manga->id]);
     }
 }
