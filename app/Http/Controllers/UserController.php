@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Comment;
+use App\Models\Manga;
+use App\Models\notification;
 use App\Models\Users;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -59,6 +61,8 @@ class UserController extends Controller
                 "id_user"=>Auth::user()->id,
                 "id_manga"=>$request->id
             ]);
+            DB::connection('conn_proyek')->table('notify')->where('id_user','=',Auth::user()->id)
+                ->where('id_manga', '=', $request->id)->delete();
             return response()->json(['success'=>'Fav Added']);
         }
         else{
@@ -66,7 +70,14 @@ class UserController extends Controller
                 ->where('id_user','=',Auth::user()->id)
                 ->where('id_manga','=',$request->id)
                 ->delete();
-            return response()->json(['success'=>'Fav Removed']);
+            $notif = notification::create([
+                "id_user" => Auth::user()->id,
+                "id_manga" => $request->id
+            ]);
+
+            if($notif){
+                return response()->json(['success'=>'Fav Removed']);
+            }
         }
     }
 

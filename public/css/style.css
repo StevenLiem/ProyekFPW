@@ -79,3 +79,7 @@ body{
     background-color: #026838;
     color: white;
 }
+
+table{
+    border: 1pt solid white;
+}
