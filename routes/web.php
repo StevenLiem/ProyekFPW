@@ -46,6 +46,7 @@ Route::middleware(['CheckRole:user'])->group(function () {
     Route::post('show/{id}/addComment', [UserController::class, 'addComment']);
     Route::post('show/{id}/addFavorite', [UserController::class, 'addFavorite']);
     Route::get('favorite', [UserController::class, 'gotoFavorite'])->name('favorite');
+    Route::get('notify', [UserController::class, 'toNotification'])->name('notify');
 });
 
 Route::prefix('admin')->middleware(['CheckRole:admin'])->group(function () {

@@ -84,4 +84,8 @@ class UserController extends Controller
             return back()->with('msg', 'Your account is premium now!');
         }
     }
+
+    public function toNotification(){
+        return view('notification');
+    }
 }

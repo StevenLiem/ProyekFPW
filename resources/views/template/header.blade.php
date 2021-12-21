@@ -26,6 +26,11 @@
                         <li class="nav-list">
                             <a class="btn shadow-none" href="{{route('favorite')}}" >Favorite</a>
                         </li>
+                        @if(Auth::user()->privilege == "premium")
+                            <li class="nav-list">
+                                <a class="btn shadow-none" href="{{route('notify')}}">Notify</a>
+                            </li>
+                        @endif
                     </ul>
                 </div>
                 <div class="navbar-nav ms-auto">
