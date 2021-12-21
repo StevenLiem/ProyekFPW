@@ -1,15 +1,15 @@
 @extends("template.body")
 
 @section('title')
-    <title> Notification </title>
+    <title> History </title>
 @endsection
 
 @section('mainContent')
     <div class="text-center fs-2 my-3 fw-bold">
-        Notification
+        History
     </div>
     <div class="container rounded" style="background-color: #191a1c;">
-        <table>
+        <table class="table table-dark table-striped">
             <th>
                 <td style="width: 300px">Title</td>
                 <td style="width: 700px">Synopsis</td>

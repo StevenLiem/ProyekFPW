@@ -29,7 +29,7 @@
                         @if(loggedIn())
                             @if(Auth::user()->privilege == "premium")
                                 <li class="nav-list">
-                                    <a class="btn shadow-none" href="{{route('notify')}}">Notify</a>
+                                    <a class="btn shadow-none" href="{{route('notify')}}">History</a>
                                 </li>
                             @endif
                         @endif
